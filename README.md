@@ -9,7 +9,8 @@
 <p align="center">
   <a href="#quick-start">Quick Start</a> •
   <a href="#whats-included">What's Included</a> •
-  <a href="#architecture">Architecture</a>
+  <a href="#architecture">Architecture</a> •
+  <a href="#中文说明">中文说明</a>
 </p>
 
 ---
@@ -29,6 +30,17 @@ Archon is the **command center** for AI coding assistants. For you, it's a sleek
 This new vision for Archon replaces the old one (the agenteer). Archon used to be the AI agent that builds other agents, and now you can use Archon to do that and more.
 
 > It doesn't matter what you're building or if it's a new/existing codebase - Archon's knowledge and task management capabilities will improve the output of **any** AI driven coding.
+
+## 🌐 Multilingual Support
+
+**Archon now supports both English and Chinese interfaces!** 🇺🇸🇨🇳
+
+- **Full Chinese Localization**: Complete user interface translation
+- **Seamless Language Switching**: Easy toggle between languages
+- **Localized User Experience**: All features work perfectly in both languages
+- **Chinese Documentation**: See [README_zh.md](README_zh.md) for detailed Chinese documentation
+
+The interface automatically adapts to your preferred language, making Archon accessible to a global developer community.
 
 ## 🔗 Important Links
 
@@ -294,3 +306,50 @@ cd docs && npm start
 Archon Community License (ACL) v1.2 - see [LICENSE](LICENSE) file for details.
 
 **TL;DR**: Archon is free, open, and hackable. Run it, fork it, share it - just don't sell it as-a-service without permission.
+
+---
+
+## 🇨🇳 中文说明
+
+**Archon 现已完全支持中文界面！**
+
+### 多语言特性
+
+- ✅ **完整的中文用户界面** - 所有页面和组件都已汉化
+- ✅ **中英文无缝切换** - 轻松在两种语言间切换
+- ✅ **本地化用户体验** - 所有功能在中文环境下完美运行
+- ✅ **专业术语翻译** - AI、知识库、项目管理等专业术语准确翻译
+
+### 已汉化的功能模块
+
+- 🏠 **引导页面** - 欢迎界面和初始设置向导
+- 🧭 **侧边导航** - 主要功能导航菜单
+- ⚙️ **设置页面** - 系统配置和API密钥管理
+- 📚 **知识库页面** - 文档管理和搜索功能
+- 🤖 **MCP客户端页面** - AI助手连接和配置
+- 📋 **项目管理页面** - 项目创建和任务管理
+- 💬 **聊天面板** - AI对话界面
+- 🎛️ **主布局** - 整体界面框架
+
+### 技术实现
+
+- 基于 `react-i18next` 国际化框架
+- 统一的翻译键管理系统
+- 动态语言切换支持
+- 完整的类型安全保障
+
+### 详细中文文档
+
+如需查看完整的中文安装和使用指南，请参阅：
+📖 **[中文详细文档 (README_zh.md)](README_zh.md)**
+
+该文档包含：
+- 详细的安装步骤
+- 功能介绍和使用方法
+- 架构说明
+- 开发指南
+- 常见问题解答
+
+---
+
+*让 Archon 成为全球开发者的AI编程助手指挥中心！* 🚀
