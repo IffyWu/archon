@@ -1,0 +1,156 @@
+{
+  "navigation": {
+    "knowledgeBase": "Knowledge Base",
+    "mcpServer": "MCP Server",
+    "projectManagement": "Project Management",
+    "projectsDisabled": "Projects Disabled",
+    "settings": "Settings"
+  },
+  "knowledgePage": {
+    "title": "Knowledge Base",
+    "searchPlaceholder": "Search knowledge base...",
+    "filters": {
+      "all": "All",
+      "documents": "Documents",
+      "code": "Code",
+      "web": "Web"
+    },
+    "status": {
+      "loading": "Loading...",
+      "noResults": "No results found",
+      "error": "Error loading knowledge base"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "upload": "Upload",
+      "delete": "Delete"
+    }
+  },
+  "mcpClientsPage": {
+    "title": "MCP Clients",
+    "status": {
+      "connected": "Connected",
+      "disconnected": "Disconnected",
+      "connecting": "Connecting..."
+    },
+    "actions": {
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "refresh": "Refresh"
+    }
+  },
+  "projectPage": {
+    "title": "Projects",
+    "createProject": "Create Project",
+    "projectName": "Project Name",
+    "projectDescription": "Project Description",
+    "actions": {
+      "create": "Create",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "confirmDelete": "Are you sure you want to delete this project?",
+    "status": {
+      "creating": "Creating project...",
+      "loading": "Loading projects...",
+      "error": "Error loading projects"
+    }
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "features": "Features",
+    "ideGlobalRules": "IDE Global Rules",
+    "testStatus": "Test Status",
+    "apiKeys": "API Keys",
+    "ragSettings": "RAG Settings",
+    "codeExtraction": "Code Extraction",
+    "bugReport": {
+      "title": "Bug Report",
+      "description": "Found a bug or issue? Report it to help improve Archon V2 Alpha.",
+      "reportButton": "Report Bug",
+      "privacy": {
+        "directToGithub": "Bug reports are sent directly to GitHub Issues",
+        "systemContext": "System context is automatically collected",
+        "privacyProtected": "Your privacy is protected - no personal data is sent"
+      }
+    },
+    "buttonPlayground": "Button Playground"
+  },
+  "mainLayout": {
+    "backendStarting": "Backend is starting...",
+    "backendError": "Failed to start backend. Please check your configuration.",
+    "knowledgeAssistant": "Knowledge Assistant - Coming Soon",
+    "comingSoon": "Coming Soon",
+    "knowledgeAssistantDevelopment": "Knowledge Assistant is under development"
+  },
+  "backendError": {
+    "title": "Backend Service Startup Failure",
+    "description": "The Archon backend service failed to start. This is typically due to a configuration issue.",
+    "checkDockerLogs": "Check Docker Logs",
+    "dockerLogsDescription": "Check the <span class=\"text-red-400 font-bold\">Archon-Server</span> logs in Docker Desktop for detailed error information.",
+    "steps": {
+      "openDocker": "1. Open Docker Desktop",
+      "goToContainers": "2. Go to Containers tab",
+      "clickArchonServer": "3. Click on <span class=\"text-red-400 font-semibold\">Archon-Server</span>",
+      "viewLogs": "4. View the logs for the specific error message"
+    },
+    "commonIssue": "<strong>Common issue:</strong> Using an ANON key instead of SERVICE key in your .env file",
+    "fixInstructions": "After fixing the issue in your .env file, recreate the Docker containers:",
+    "dockerNote": "Note: Use 'down' and 'up', not 'restart' - containers need to be recreated to load new environment variables",
+    "retryButton": "Retry Connection"
+  },
+  "chatPanel": {
+    "title": "Knowledge Base Assistant",
+    "status": {
+      "offline": "Chat Offline",
+      "connecting": "Connecting...",
+      "online": "Online",
+      "reconnecting": "Attempting to reconnect..."
+    },
+    "messages": {
+      "agentTyping": "Agent is typing...",
+      "offlineMessage": "Chat is currently offline. Please use the reconnect button above to try again.",
+      "offlineShort": "Chat is offline...",
+      "connectingMessage": "Connecting..."
+    },
+    "input": {
+      "placeholder": "Search the knowledge base...",
+      "placeholderOffline": "Chat is offline...",
+      "placeholderConnecting": "Connecting..."
+    },
+    "errors": {
+      "reconnectionFailed": "Reconnection failed. Server may still be offline.",
+      "initializationFailed": "Failed to initialize chat. Server may be offline.",
+      "sendMessageFailed": "Failed to send message. Please try again."
+    }
+  },
+  "onboardingPage": {
+    "welcome": "Welcome to Archon",
+    "setupWizard": "Setup Wizard",
+    "getStarted": "Get Started",
+    "next": "Next",
+    "previous": "Previous",
+    "finish": "Finish"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "refresh": "Refresh",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "close": "Close",
+    "open": "Open",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

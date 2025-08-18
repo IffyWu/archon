@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
 import { Search, Grid, Plus, Upload, Link as LinkIcon, Brain, Filter, BoxIcon, List, BookOpen, CheckSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
@@ -54,6 +55,7 @@ interface GroupedKnowledgeItem {
 
 
 export const KnowledgeBasePage = () => {
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -891,31 +893,31 @@ export const KnowledgeBasePage = () => {
       <motion.div className="flex justify-between items-center mb-8" initial="hidden" animate="visible" variants={headerContainerVariants}>
         <motion.h1 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3" variants={titleVariants}>
           <BookOpen className="w-7 h-7 text-green-500 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-          Knowledge Base
+          {t('knowledgePage.title')}
         </motion.h1>
         <motion.div className="flex items-center gap-4" variants={headerItemVariants}>
           {/* Search Bar */}
           <div className="relative">
-            <Input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search knowledge base..." accentColor="purple" icon={<Search className="w-4 h-4" />} />
+            <Input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={t('knowledgePage.searchPlaceholder')} accentColor="purple" icon={<Search className="w-4 h-4" />} />
           </div>
           {/* Type Filter */}
           <div className="flex items-center bg-gray-50 dark:bg-black border border-gray-200 dark:border-zinc-900 rounded-md overflow-hidden">
-            <button onClick={() => setTypeFilter('all')} className={`p-2 ${typeFilter === 'all' ? 'bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-white' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="All Types">
+            <button onClick={() => setTypeFilter('all')} className={`p-2 ${typeFilter === 'all' ? 'bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-white' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title={t('knowledgePage.filters.allTypes')}>
               <Filter className="w-4 h-4" />
             </button>
-            <button onClick={() => setTypeFilter('technical')} className={`p-2 ${typeFilter === 'technical' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Technical/Coding">
+            <button onClick={() => setTypeFilter('technical')} className={`p-2 ${typeFilter === 'technical' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title={t('knowledgePage.filters.technical')}>
               <BoxIcon className="w-4 h-4" />
             </button>
-            <button onClick={() => setTypeFilter('business')} className={`p-2 ${typeFilter === 'business' ? 'bg-pink-100 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Business/Project">
+            <button onClick={() => setTypeFilter('business')} className={`p-2 ${typeFilter === 'business' ? 'bg-pink-100 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title={t('knowledgePage.filters.business')}>
               <Brain className="w-4 h-4" />
             </button>
           </div>
           {/* View Toggle */}
           <div className="flex items-center bg-gray-50 dark:bg-black border border-gray-200 dark:border-zinc-900 rounded-md overflow-hidden">
-            <button onClick={() => setViewMode('grid')} className={`p-2 ${viewMode === 'grid' ? 'bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Grid View">
+            <button onClick={() => setViewMode('grid')} className={`p-2 ${viewMode === 'grid' ? 'bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title={t('knowledgePage.views.grid')}>
               <Grid className="w-4 h-4" />
             </button>
-            <button onClick={() => setViewMode('table')} className={`p-2 ${viewMode === 'table' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Table View">
+            <button onClick={() => setViewMode('table')} className={`p-2 ${viewMode === 'table' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title={t('knowledgePage.views.table')}>
               <List className="w-4 h-4" />
             </button>
           </div>
@@ -927,13 +929,13 @@ export const KnowledgeBasePage = () => {
             className={isSelectionMode ? "bg-blue-500/10 border-blue-500/40" : ""}
           >
             <CheckSquare className="w-4 h-4 mr-2 inline" />
-            <span>{isSelectionMode ? 'Cancel' : 'Select'}</span>
+            <span>{isSelectionMode ? t('knowledgePage.selection.cancel') : t('knowledgePage.selection.select')}</span>
           </Button>
           {/* Add Button */}
           <Button onClick={handleAddKnowledge} variant="primary" accentColor="purple" className="shadow-lg shadow-purple-500/20">
-            <Plus className="w-4 h-4 mr-2 inline" />
-            <span>Knowledge</span>
-          </Button>
+              <Plus className="w-4 h-4 mr-2 inline" />
+              <span>{t('knowledgePage.addKnowledge')}</span>
+            </Button>
         </motion.div>
       </motion.div>
       {/* Selection Toolbar - appears when items are selected */}
@@ -949,7 +951,7 @@ export const KnowledgeBasePage = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {selectedItems.size} item{selectedItems.size > 1 ? 's' : ''} selected
+                    {t('knowledgePage.selection.itemsSelected', { count: selectedItems.size })}
                   </span>
                   <Button
                     onClick={selectAll}
@@ -957,7 +959,7 @@ export const KnowledgeBasePage = () => {
                     size="sm"
                     accentColor="blue"
                   >
-                    Select All
+                    {t('knowledgePage.selection.selectAll')}
                   </Button>
                   <Button
                     onClick={deselectAll}
@@ -965,7 +967,7 @@ export const KnowledgeBasePage = () => {
                     size="sm"
                     accentColor="gray"
                   >
-                    Clear Selection
+                    {t('knowledgePage.selection.clearSelection')}
                   </Button>
                 </div>
                 <div className="flex items-center gap-2">
@@ -975,7 +977,7 @@ export const KnowledgeBasePage = () => {
                     size="sm"
                     accentColor="blue"
                   >
-                    Create Group
+                    {t('knowledgePage.selection.createGroup')}
                   </Button>
                   <Button
                     onClick={deleteSelectedItems}
@@ -983,7 +985,7 @@ export const KnowledgeBasePage = () => {
                     size="sm"
                     accentColor="pink"
                   >
-                    Delete Selected
+                    {t('knowledgePage.selection.deleteSelected')}
                   </Button>
                 </div>
               </div>
@@ -1141,7 +1143,7 @@ export const KnowledgeBasePage = () => {
                     {/* No items message */}
                     {groupedItems.length === 0 && ungroupedItems.length === 0 && progressItems.length === 0 && (
                       <motion.div variants={contentItemVariants} className="col-span-full py-10 text-center text-gray-500 dark:text-zinc-400">
-                        No knowledge items found for the selected filter.
+                        {t('knowledgePage.noItemsFound')}
                       </motion.div>
                     )}
                   </>
@@ -1212,6 +1214,7 @@ const AddKnowledgeModal = ({
   onSuccess,
   onStartCrawl
 }: AddKnowledgeModalProps) => {
+  const { t } = useTranslation();
   const [method, setMethod] = useState<'url' | 'file'>('url');
   const [url, setUrl] = useState('');
   const [tags, setTags] = useState<string[]>([]);
@@ -1393,12 +1396,12 @@ const AddKnowledgeModal = ({
   return <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-2xl relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[1px] before:bg-green-500 p-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-8">
-          Add Knowledge Source
+          {t('knowledgePage.addModal.title')}
         </h2>
         {/* Knowledge Type Selection */}
         <div className="mb-6">
           <label className="block text-gray-600 dark:text-zinc-400 text-sm mb-2">
-            Knowledge Type
+            {t('knowledgePage.addModal.knowledgeTypeLabel')}
           </label>
           <div className="flex gap-4">
             <label className={`
@@ -1407,7 +1410,7 @@ const AddKnowledgeModal = ({
               `}>
               <input type="radio" name="knowledgeType" value="technical" checked={knowledgeType === 'technical'} onChange={() => setKnowledgeType('technical')} className="sr-only" />
               <BoxIcon className="w-5 h-5" />
-              <span>Technical/Coding</span>
+              <span>{t('knowledgePage.addModal.knowledgeType.technical')}</span>
             </label>
             <label className={`
                 flex-1 p-4 rounded-md border cursor-pointer transition flex items-center justify-center gap-2
@@ -1415,7 +1418,7 @@ const AddKnowledgeModal = ({
               `}>
               <input type="radio" name="knowledgeType" value="business" checked={knowledgeType === 'business'} onChange={() => setKnowledgeType('business')} className="sr-only" />
               <Brain className="w-5 h-5" />
-              <span>Business/Project</span>
+              <span>{t('knowledgePage.addModal.knowledgeType.business')}</span>
             </label>
           </div>
         </div>
@@ -1423,26 +1426,26 @@ const AddKnowledgeModal = ({
         <div className="flex gap-4 mb-6">
           <button onClick={() => setMethod('url')} className={`flex-1 p-4 rounded-md border ${method === 'url' ? 'border-blue-500 text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-blue-300 dark:hover:border-blue-500/30'} transition flex items-center justify-center gap-2`}>
             <LinkIcon className="w-4 h-4" />
-            <span>URL / Website</span>
+            <span>{t('knowledgePage.addModal.sourceType.url')}</span>
           </button>
           <button onClick={() => setMethod('file')} className={`flex-1 p-4 rounded-md border ${method === 'file' ? 'border-pink-500 text-pink-600 dark:text-pink-500 bg-pink-50 dark:bg-pink-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-pink-300 dark:hover:border-pink-500/30'} transition flex items-center justify-center gap-2`}>
             <Upload className="w-4 h-4" />
-            <span>Upload File</span>
+            <span>{t('knowledgePage.addModal.sourceType.file')}</span>
           </button>
         </div>
         {/* URL Input */}
         {method === 'url' && <div className="mb-6">
             <Input 
-              label="URL to Scrape" 
+              label={t('knowledgePage.addModal.urlLabel')} 
               type="url" 
               value={url} 
               onChange={e => setUrl(e.target.value)} 
-              placeholder="https://example.com or example.com" 
+              placeholder={t('knowledgePage.addModal.urlPlaceholder')} 
               accentColor="blue" 
             />
             {url && !url.startsWith('http://') && !url.startsWith('https://') && (
               <p className="text-amber-600 dark:text-amber-400 text-sm mt-1">
-                ℹ️ Will automatically add https:// prefix
+                ℹ️ {t('knowledgePage.addModal.httpsPrefix')}
               </p>
             )}
           </div>}
@@ -1450,7 +1453,7 @@ const AddKnowledgeModal = ({
         {method === 'file' && (
           <div className="mb-6">
             <label className="block text-gray-600 dark:text-zinc-400 text-sm mb-2">
-              Upload Document
+              {t('knowledgePage.addModal.uploadLabel')}
             </label>
             <div className="relative">
               <input 
@@ -1472,16 +1475,16 @@ const AddKnowledgeModal = ({
                 <Upload className="w-6 h-6" />
                 <div className="text-center">
                   <div className="font-medium">
-                    {selectedFile ? selectedFile.name : 'Choose File'}
+                    {selectedFile ? selectedFile.name : t('knowledgePage.addModal.chooseFile')}
                   </div>
                   <div className="text-sm opacity-75 mt-1">
-                    {selectedFile ? `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB` : 'Click to browse or drag and drop'}
+                    {selectedFile ? `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB` : t('knowledgePage.addModal.dragDrop')}
                   </div>
                 </div>
               </label>
             </div>
             <p className="text-gray-500 dark:text-zinc-600 text-sm mt-2">
-              Supports PDF, MD, DOC up to 10MB
+              {t('knowledgePage.addModal.supportedFiles')}
             </p>
           </div>
         )}
@@ -1489,7 +1492,7 @@ const AddKnowledgeModal = ({
         {method === 'url' && (
           <div className="mb-6">
             <label className="block text-gray-600 dark:text-zinc-400 text-sm mb-4">
-              Crawl Depth
+              {t('knowledgePage.addModal.crawlDepth')}
               <button
                 type="button"
                 className="ml-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
@@ -1514,7 +1517,7 @@ const AddKnowledgeModal = ({
         {/* Tags */}
         <div className="mb-6">
           <label className="block text-gray-600 dark:text-zinc-400 text-sm mb-2">
-            Tags (AI will add recommended tags if left blank)
+            {t('knowledgePage.addModal.tagsLabel')}
           </label>
           <div className="flex flex-wrap gap-2 mb-2">
             {tags.map(tag => <Badge key={tag} color="purple" variant="outline">
@@ -1526,15 +1529,15 @@ const AddKnowledgeModal = ({
             setTags([...tags, newTag.trim()]);
             setNewTag('');
           }
-        }} placeholder="Add tags..." accentColor="purple" />
+        }} placeholder={t('knowledgePage.addModal.tagsPlaceholder')} accentColor="purple" />
         </div>
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
           <Button onClick={onClose} variant="ghost" disabled={loading}>
-            Cancel
+            {t('knowledgePage.addModal.cancel')}
           </Button>
           <Button onClick={handleSubmit} variant="primary" accentColor={method === 'url' ? 'blue' : 'pink'} disabled={loading}>
-            {loading ? 'Adding...' : 'Add Source'}
+            {loading ? t('knowledgePage.addModal.adding') : t('knowledgePage.addModal.addSource')}
           </Button>
         </div>
       </Card>

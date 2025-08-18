@@ -7,6 +7,7 @@ import { useStaggeredEntrance } from '../hooks/useStaggeredEntrance';
 import { useToast } from '../contexts/ToastContext';
 import { mcpServerService, ServerStatus, LogEntry, ServerConfig } from '../services/mcpServerService';
 import { IDEGlobalRules } from '../components/settings/IDEGlobalRules';
+import { useTranslation } from 'react-i18next';
 // import { MCPClients } from '../components/mcp/MCPClients'; // Commented out - feature not implemented
 
 // Supported IDE/Agent types
@@ -37,6 +38,7 @@ type SupportedIDE = 'windsurf' | 'cursor' | 'claudecode' | 'cline' | 'kiro' | 'a
  * @component
  */
 export const MCPPage = () => {
+  const { t } = useTranslation();
   const [serverStatus, setServerStatus] = useState<ServerStatus>({
     status: 'stopped',
     uptime: null,
@@ -398,7 +400,7 @@ export const MCPPage = () => {
           <path d="M15.688 2.343a2.588 2.588 0 00-3.61 0l-9.626 9.44a.863.863 0 01-1.203 0 .823.823 0 010-1.18l9.626-9.44a4.313 4.313 0 016.016 0 4.116 4.116 0 011.204 3.54 4.3 4.3 0 013.609 1.18l.05.05a4.115 4.115 0 010 5.9l-8.706 8.537a.274.274 0 000 .393l1.788 1.754a.823.823 0 010 1.18.863.863 0 01-1.203 0l-1.788-1.753a1.92 1.92 0 010-2.754l8.706-8.538a2.47 2.47 0 000-3.54l-.05-.049a2.588 2.588 0 00-3.607-.003l-7.172 7.034-.002.002-.098.097a.863.863 0 01-1.204 0 .823.823 0 010-1.18l7.273-7.133a2.47 2.47 0 00-.003-3.537z"></path>
           <path d="M14.485 4.703a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a4.115 4.115 0 000 5.9 4.314 4.314 0 006.016 0l7.12-6.982a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a2.588 2.588 0 01-3.61 0 2.47 2.47 0 010-3.54l7.12-6.982z"></path>
         </svg>
-        MCP Dashboard
+        {t('mcpPage.title')}
       </motion.h1>
 
       {/* Tab Navigation */}
@@ -412,7 +414,7 @@ export const MCPPage = () => {
                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
             }`}
           >
-            Server Control
+            {t('mcpPage.tabs.serverControl')}
             {activeTab === 'server' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></span>
             )}
@@ -445,7 +447,7 @@ export const MCPPage = () => {
             <div className="flex flex-col">
               <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
                 <Server className="mr-2 text-blue-500" size={20} />
-                Archon MCP Server
+                {t('mcpPage.serverTitle')}
               </h2>
               
               <Card accentColor="blue" className="space-y-6 flex-1">
@@ -461,11 +463,11 @@ export const MCPPage = () => {
                     {getStatusIcon()}
                     <div>
                       <p className={`font-semibold ${getStatusColor()}`}>
-                        Status: {serverStatus.status.charAt(0).toUpperCase() + serverStatus.status.slice(1)}
+                        {t('mcpPage.status.label')}: {t(`mcpPage.status.${serverStatus.status}`)}
                       </p>
                       {serverStatus.uptime !== null && (
                         <p className="text-sm text-gray-600 dark:text-zinc-400">
-                          Uptime: {formatUptime(serverStatus.uptime)}
+                          {t('mcpPage.uptime')}: {formatUptime(serverStatus.uptime)}
                         </p>
                       )}
                     </div>
@@ -484,12 +486,12 @@ export const MCPPage = () => {
                         {isStarting ? (
                           <>
                             <Loader className="w-4 h-4 mr-2 animate-spin inline" />
-                            Starting...
+                            {t('mcpPage.buttons.starting')}
                           </>
                         ) : (
                           <>
                             <Play className="w-4 h-4 mr-2 inline" />
-                            Start Server
+                            {t('mcpPage.buttons.startServer')}
                           </>
                         )}
                       </Button>
@@ -504,12 +506,12 @@ export const MCPPage = () => {
                         {isStopping ? (
                           <>
                             <Loader className="w-4 h-4 mr-2 animate-spin inline" />
-                            Stopping...
+                            {t('mcpPage.buttons.stopping')}
                           </>
                         ) : (
                           <>
                             <Square className="w-4 h-4 mr-2 inline" />
-                            Stop Server
+                            {t('mcpPage.buttons.stopServer')}
                           </>
                         )}
                       </Button>
@@ -522,9 +524,9 @@ export const MCPPage = () => {
                   <div className="border-t border-gray-200 dark:border-zinc-800 pt-4">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-medium text-gray-700 dark:text-zinc-300">
-                        IDE Configuration
+                        {t('mcpPage.ideConfiguration')}
                         <span className="ml-2 px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                          HTTP Mode
+                          {t('mcpPage.httpMode')}
                         </span>
                       </h3>
                       <Button
@@ -534,7 +536,7 @@ export const MCPPage = () => {
                         onClick={handleCopyConfig}
                       >
                         <Copy className="w-3 h-3 mr-1 inline" />
-                        Copy
+                        {t('mcpPage.buttons.copy')}
                       </Button>
                     </div>
                     
@@ -549,7 +551,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Claude Code
+                          {t('mcpPage.ides.claudecode')}
                         </button>
                         <button
                           onClick={() => setSelectedIDE('cursor')}
@@ -559,7 +561,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Cursor
+                          {t('mcpPage.ides.cursor')}
                         </button>
                         <button
                           onClick={() => setSelectedIDE('windsurf')}
@@ -569,7 +571,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Windsurf
+                          {t('mcpPage.ides.windsurf')}
                         </button>
                         <button
                           onClick={() => setSelectedIDE('cline')}
@@ -579,7 +581,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Cline
+                          {t('mcpPage.ides.cline')}
                         </button>
                         <button
                           onClick={() => setSelectedIDE('kiro')}
@@ -589,7 +591,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Kiro
+                          {t('mcpPage.ides.kiro')}
                         </button>
                         <button
                           onClick={() => setSelectedIDE('augment')}
@@ -599,7 +601,7 @@ export const MCPPage = () => {
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
-                          Augment
+                          {t('mcpPage.ides.augment')}
                         </button>
                       </div>
                     </div>
@@ -648,10 +650,10 @@ export const MCPPage = () => {
                           className="w-full"
                         >
                           <Server className="w-4 h-4 mr-2 inline" />
-                          One-Click Install for Cursor
+                          {t('mcpPage.buttons.oneClickInstall')}
                         </Button>
                         <p className="text-xs text-gray-500 dark:text-zinc-500 mt-2 text-center">
-                          Requires Cursor to be installed and will open a deeplink
+                          {t('mcpPage.cursorInstallNote')}
                         </p>
                       </div>
                     )}
@@ -664,15 +666,15 @@ export const MCPPage = () => {
             <div className="flex flex-col">
               <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
                 <Clock className="mr-2 text-purple-500" size={20} />
-                Server Logs
+                {t('mcpPage.serverLogs')}
               </h2>
               
               <Card accentColor="purple" className="h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm text-gray-600 dark:text-zinc-400">
                     {logs.length > 0 
-                      ? `Showing ${logs.length} log entries`
-                      : 'No logs available'
+                      ? t('mcpPage.logs.showing', { count: logs.length })
+                      : t('mcpPage.logs.noLogs')
                     }
                   </p>
                   <Button
@@ -681,7 +683,7 @@ export const MCPPage = () => {
                     onClick={handleClearLogs}
                     disabled={logs.length === 0}
                   >
-                    Clear Logs
+                    {t('mcpPage.buttons.clearLogs')}
                   </Button>
                 </div>
                 
@@ -693,8 +695,8 @@ export const MCPPage = () => {
                   {logs.length === 0 ? (
                     <p className="text-gray-500 dark:text-zinc-500 text-center py-8">
                       {serverStatus.status === 'running' 
-                        ? 'Waiting for log entries...'
-                        : 'Start the server to see logs'
+                        ? t('mcpPage.logs.waiting')
+                        : t('mcpPage.logs.startServer')
                       }
                     </p>
                   ) : (
@@ -723,7 +725,7 @@ export const MCPPage = () => {
           <motion.div className="mt-6" variants={itemVariants}>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
               <Server className="mr-2 text-pink-500" size={20} />
-              Global IDE Rules
+              {t('mcpPage.globalIdeRules')}
             </h2>
             <IDEGlobalRules />
           </motion.div>

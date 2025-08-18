@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Send, User, WifiOff, RefreshCw, BookOpen, Search } from 'lucide-react';
 import { ArchonLoadingSpinner, EdgeLitEffect } from '../animations/Animations';
 import { agentChatService, ChatMessage } from '../../services/agentChatService';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Props for the ArchonChatPanel component
@@ -16,6 +17,8 @@ interface ArchonChatPanelProps {
  * loading states, and input functionality connected to real AI agents.
  */
 export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
+  const { t } = useTranslation();
+  
   // State for messages, session, and other chat functionality
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -108,7 +111,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               setIsStreaming(false);
               setStreamingMessage('');
             },
-            (error: Event) => {
+            (error: Event | Error) => {
               console.error('WebSocket error:', error);
               // Don't set error message here, let the status handler manage it
             },
@@ -283,7 +286,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
                 <img src="/logo-neon.png" alt="Archon" className="w-6 h-6 z-10 relative" />
               </div>
               <h2 className="text-gray-800 dark:text-white font-medium z-10 relative">
-                Knowledge Base Assistant
+                {t('chatPanel.title')}
               </h2>
             </div>
           </div>
@@ -295,7 +298,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               <div className="flex items-center gap-2">
                 <div className="flex items-center text-xs text-red-500 bg-red-100/80 dark:bg-red-900/30 px-2 py-1 rounded">
                   <WifiOff className="w-3 h-3 mr-1" />
-                  Chat Offline
+                  {t('chatPanel.status.offline')}
                 </div>
                 <button
                   onClick={handleReconnect}
@@ -303,7 +306,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
                   className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 bg-blue-100/80 hover:bg-blue-200/80 dark:bg-blue-900/30 dark:hover:bg-blue-800/40 px-2 py-1 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <RefreshCw className={`w-3 h-3 ${isReconnecting ? 'animate-spin' : ''}`} />
-                  {isReconnecting ? 'Connecting...' : 'Reconnect'}
+                  {isReconnecting ? t('chatPanel.status.connecting') : t('common.refresh')}
                 </button>
               </div>
             )}
@@ -312,7 +315,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               <div className="text-xs text-blue-500 bg-blue-100/80 dark:bg-blue-900/30 px-2 py-1 rounded">
                 <div className="flex items-center">
                   <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
-                  Connecting...
+                  {t('chatPanel.status.connecting')}
                 </div>
               </div>
             )}
@@ -321,7 +324,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               <div className="text-xs text-green-600 bg-green-100/80 dark:bg-green-900/30 px-2 py-1 rounded">
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-1" />
-                  Online
+                  {t('chatPanel.status.online')}
                 </div>
               </div>
             )}
@@ -411,7 +414,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               <div className="max-w-[80%] mr-auto flex items-center justify-center py-4">
                 <ArchonLoadingSpinner size="md" />
                 <span className="ml-2 text-sm text-gray-500 dark:text-zinc-400">
-                  Agent is typing...
+                  {t('chatPanel.messages.agentTyping')}
                 </span>
               </div>
             </div>
@@ -424,7 +427,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
             <div className="mb-3 p-3 bg-red-50/80 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 rounded-md">
               <div className="flex items-center text-sm text-red-700 dark:text-red-300">
                 <WifiOff className="w-4 h-4 mr-2" />
-                Chat is currently offline. Please use the reconnect button above to try again.
+                {t('chatPanel.messages.offlineMessage')}
               </div>
             </div>
           )}
@@ -437,9 +440,9 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
                 value={inputValue} 
                 onChange={e => setInputValue(e.target.value)} 
                 placeholder={
-                  connectionStatus === 'offline' ? "Chat is offline..." :
-                  connectionStatus === 'connecting' ? "Connecting..." :
-                  "Search the knowledge base..."
+                  connectionStatus === 'offline' ? t('chatPanel.input.placeholderOffline') :
+                  connectionStatus === 'connecting' ? t('chatPanel.input.placeholderConnecting') :
+                  t('chatPanel.input.placeholder')
                 }
                 disabled={connectionStatus !== 'online'} 
                 className="w-full bg-transparent text-gray-800 dark:text-white placeholder:text-gray-500 dark:placeholder:text-zinc-600 focus:outline-none disabled:opacity-50" 

@@ -12,6 +12,7 @@ import { ProjectPage } from './pages/ProjectPage';
 import { DisconnectScreenOverlay } from './components/DisconnectScreenOverlay';
 import { ErrorBoundaryWithBugReport } from './components/bug-report/ErrorBoundaryWithBugReport';
 import { serverHealthService } from './services/serverHealthService';
+import './i18n';
 
 const AppRoutes = () => {
   const { projectsEnabled } = useSettings();

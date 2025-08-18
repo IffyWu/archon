@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BookOpen, HardDrive, Settings } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../contexts/SettingsContext';
 /**
  * Interface for navigation items
@@ -47,6 +48,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
   className = '',
   'data-id': dataId
 }) => {
+  const { t } = useTranslation();
   // State to track which tooltip is currently visible
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const { projectsEnabled } = useSettings();
@@ -55,19 +57,19 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
   const navigationItems: NavigationItem[] = [{
     path: '/',
     icon: <BookOpen className="h-5 w-5" />,
-    label: 'Knowledge Base'
+    label: t('navigation.knowledgeBase')
   }, {
     path: '/mcp',
     icon: <svg fill="currentColor" fillRule="evenodd" height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.688 2.343a2.588 2.588 0 00-3.61 0l-9.626 9.44a.863.863 0 01-1.203 0 .823.823 0 010-1.18l9.626-9.44a4.313 4.313 0 016.016 0 4.116 4.116 0 011.204 3.54 4.3 4.3 0 013.609 1.18l.05.05a4.115 4.115 0 010 5.9l-8.706 8.537a.274.274 0 000 .393l1.788 1.754a.823.823 0 010 1.18.863.863 0 01-1.203 0l-1.788-1.753a1.92 1.92 0 010-2.754l8.706-8.538a2.47 2.47 0 000-3.54l-.05-.049a2.588 2.588 0 00-3.607-.003l-7.172 7.034-.002.002-.098.097a.863.863 0 01-1.204 0 .823.823 0 010-1.18l7.273-7.133a2.47 2.47 0 00-.003-3.537z"></path><path d="M14.485 4.703a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a4.115 4.115 0 000 5.9 4.314 4.314 0 006.016 0l7.12-6.982a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a2.588 2.588 0 01-3.61 0 2.47 2.47 0 010-3.54l7.12-6.982z"></path></svg>,
-    label: 'MCP Server'
+    label: t('navigation.mcpServer')
   }, {
     path: '/settings',
     icon: <Settings className="h-5 w-5" />,
-    label: 'Settings'
+    label: t('navigation.settings')
   }];
   // Logo configuration
   const logoSrc = "/logo-neon.png";
-  const logoAlt = 'Knowledge Base Logo';
+  const logoAlt = t('navigation.logoAlt');
   // Get current location to determine active route
   const location = useLocation();
   const isProjectsActive = location.pathname === '/projects' && projectsEnabled;
@@ -93,7 +95,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
               <span className="absolute inset-0 rounded-lg border border-blue-300 dark:border-blue-500/30"></span>
               <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]"></span>
             </>}
-          <NavTooltip show={activeTooltip === 'logo'} label="Project Management" />
+          <NavTooltip show={activeTooltip === 'logo'} label={t('navigation.projectManagement')} />
         </Link>
       ) : (
         <div 
@@ -102,7 +104,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
           onMouseLeave={() => setActiveTooltip(null)}
         >
           <img src={logoSrc} alt={logoAlt} className="w-8 h-8 transition-all duration-300" />
-          <NavTooltip show={activeTooltip === 'logo'} label="Projects Disabled" />
+          <NavTooltip show={activeTooltip === 'logo'} label={t('navigation.projectsDisabled')} />
         </div>
       )}
       {/* Navigation links */}

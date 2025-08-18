@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '../contexts/ToastContext';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStaggeredEntrance } from '../hooks/useStaggeredEntrance';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/project-tasks/Tabs';
@@ -76,6 +77,7 @@ export function ProjectPage({
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<{ id: string; title: string } | null>(null);
 
+  const { t } = useTranslation();
   const { showToast } = useToast();
 
   // Load projects on mount - simplified approach
@@ -645,8 +647,8 @@ export function ProjectPage({
       {/* Page Header with New Project Button */}
       <motion.div className="flex items-center justify-between mb-8" variants={itemVariants}>
         <motion.h1 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3" variants={titleVariants}>
-          <img src="/logo-neon.png" alt="Projects" className="w-7 h-7 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
-          Projects
+          <img src="/logo-neon.png" alt={t('projectPage.title')} className="w-7 h-7 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+          {t('projectPage.title')}
         </motion.h1>
         <Button 
           onClick={() => setIsNewProjectModalOpen(true)} 
@@ -655,7 +657,7 @@ export function ProjectPage({
           className="shadow-lg shadow-purple-500/20"
         >
           <Plus className="w-4 h-4 mr-2 inline" />
-          <span>New Project</span>
+          <span>{t('projectPage.buttons.newProject')}</span>
         </Button>
       </motion.div>
 
@@ -665,7 +667,7 @@ export function ProjectPage({
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-8 h-8 text-purple-500 mx-auto mb-4 animate-spin" />
-              <p className="text-gray-600 dark:text-gray-400">Loading your projects...</p>
+              <p className="text-gray-600 dark:text-gray-400">{t('projectPage.loading.projects')}</p>
             </div>
           </div>
         </motion.div>
@@ -678,8 +680,8 @@ export function ProjectPage({
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-4" />
               <p className="text-red-600 dark:text-red-400 mb-4">{projectsError}</p>
               <Button onClick={loadProjects} variant="primary" accentColor="purple">
-                Try Again
-              </Button>
+                  {t('projectPage.buttons.tryAgain')}
+                </Button>
             </div>
           </div>
         </motion.div>
@@ -701,11 +703,11 @@ export function ProjectPage({
                     <ProjectCreationProgressCard
                       progressData={project.creationProgress}
                       onComplete={(completedData) => {
-                        console.log('Project creation completed - card onComplete triggered', completedData);
+                        console.log(t('projectPage.creation.completed'), completedData);
                         
                         if (completedData.project && completedData.status === 'completed') {
                           // Show success toast
-                          showToast(`Project "${completedData.project.title}" created successfully!`, 'success');
+                          showToast(t('projectPage.creation.successToast', { title: completedData.project.title }), 'success');
                           
                           // Show completion briefly, then refresh to show the actual project
                           setTimeout(() => {
@@ -721,8 +723,8 @@ export function ProjectPage({
                         }
                       }}
                       onError={(error) => {
-                        console.error('Project creation failed:', error);
-                        showToast(`Failed to create project: ${error}`, 'error');
+                        console.error(t('projectPage.creation.failed'), error);
+                        showToast(t('projectPage.creation.errorToast', { error }), 'error');
                       }}
                       onRetry={() => handleRetryProjectCreation(project.creationProgress!.progressId)}
                     />
@@ -784,7 +786,7 @@ export function ProjectPage({
                         }`}>
                           <div className="flex flex-col items-center justify-center px-2 min-w-[40px]">
                             <ListTodo className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`} />
-                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`}>ToDo</span>
+                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`}>{t('projectPage.taskStatus.todo')}</span>
                           </div>
                           <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-pink-300 dark:border-pink-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
                             <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.todo || 0}</span>
@@ -802,7 +804,7 @@ export function ProjectPage({
                         }`}>
                           <div className="flex flex-col items-center justify-center px-2 min-w-[40px]">
                             <Activity className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`} />
-                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`}>Doing</span>
+                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`}>{t('projectPage.taskStatus.doing')}</span>
                           </div>
                           <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-blue-300 dark:border-blue-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
                             <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.doing || 0}</span>
@@ -820,7 +822,7 @@ export function ProjectPage({
                         }`}>
                           <div className="flex flex-col items-center justify-center px-2 min-w-[40px]">
                             <CheckCircle2 className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`} />
-                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>Done</span>
+                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>{t('projectPage.taskStatus.done')}</span>
                           </div>
                           <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-green-300 dark:border-green-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
                             <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.done || 0}</span>
@@ -835,7 +837,7 @@ export function ProjectPage({
                       <button
                         onClick={(e) => handleTogglePin(e, project)}
                         className={`p-1.5 rounded-full ${project.pinned === true ? 'bg-purple-100 text-purple-700 dark:bg-purple-700/30 dark:text-purple-400' : 'bg-gray-100 text-gray-500 dark:bg-gray-800/70 dark:text-gray-400'} hover:bg-purple-200 hover:text-purple-800 dark:hover:bg-purple-800/50 dark:hover:text-purple-300 transition-colors`}
-                        title={project.pinned === true ? 'Unpin project' : 'Pin project'}
+                        title={project.pinned === true ? t('projectPage.buttons.unpinProject') : t('projectPage.buttons.pinProject')}
                         aria-label={project.pinned === true ? 'Unpin project' : 'Pin project'}
                         data-pinned={project.pinned}
                       >
@@ -847,28 +849,28 @@ export function ProjectPage({
                         onClick={(e) => {
                           e.stopPropagation();
                           navigator.clipboard.writeText(project.id);
-                          showToast('Project ID copied to clipboard', 'success');
+                          showToast(t('projectPage.buttons.copyIdSuccess'), 'success');
                           // Visual feedback
                           const button = e.currentTarget;
                           const originalHTML = button.innerHTML;
-                          button.innerHTML = '<svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Copied!';
+                          button.innerHTML = `<svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${t('projectPage.buttons.copied')}`;
                           setTimeout(() => {
                             button.innerHTML = originalHTML;
                           }, 2000);
                         }}
                         className="flex-1 flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors py-1"
-                        title="Copy Project ID to clipboard"
+                        title={t('projectPage.buttons.copyIdTooltip')}
                       >
                         <Clipboard className="w-3 h-3" />
-                        <span>Copy ID</span>
+                        <span>{t('projectPage.buttons.copyId')}</span>
                       </button>
                       
                       {/* Delete button */}
                       <button
                         onClick={(e) => handleDeleteProject(e, project.id, project.title)}
                         className="p-1.5 rounded-full bg-gray-100 text-gray-500 hover:bg-red-100 hover:text-red-600 dark:bg-gray-800/70 dark:text-gray-400 dark:hover:bg-red-900/30 dark:hover:text-red-400 transition-colors"
-                        title="Delete project"
-                        aria-label="Delete project"
+                        title={t('projectPage.buttons.deleteProject')}
+                        aria-label={t('projectPage.buttons.deleteProject')}
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -888,7 +890,7 @@ export function ProjectPage({
           <Tabs defaultValue="tasks" value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList>
               <TabsTrigger value="docs" className="py-3 font-mono transition-all duration-300" color="blue">
-                Docs
+                {t('projectPage.tabs.docs')}
               </TabsTrigger>
               {/* <TabsTrigger value="features" className="py-3 font-mono transition-all duration-300" color="purple">
                 Features
@@ -897,7 +899,7 @@ export function ProjectPage({
                 Data
               </TabsTrigger> */}
               <TabsTrigger value="tasks" className="py-3 font-mono transition-all duration-300" color="orange">
-                Tasks
+                {t('projectPage.tabs.tasks')}
               </TabsTrigger>
             </TabsList>
             
@@ -924,7 +926,7 @@ export function ProjectPage({
                     <div className="flex items-center justify-center py-12">
                       <div className="text-center">
                         <Loader2 className="w-6 h-6 text-orange-500 mx-auto mb-4 animate-spin" />
-                        <p className="text-gray-600 dark:text-gray-400">Loading tasks...</p>
+                        <p className="text-gray-600 dark:text-gray-400">{t('projectPage.loading.tasks')}</p>
                       </div>
                     </div>
                   ) : tasksError ? (
@@ -937,7 +939,7 @@ export function ProjectPage({
                            variant="primary" 
                            accentColor="purple"
                          >
-                          Retry
+                          {t('projectPage.buttons.retry')}
                         </Button>
                       </div>
                     </div>
@@ -977,7 +979,7 @@ export function ProjectPage({
               {/* Project Creation Form */}
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-fuchsia-500 text-transparent bg-clip-text">
-                      Create New Project
+                      {t('projectPage.modal.createTitle')}
                     </h3>
                     <button 
                       onClick={() => setIsNewProjectModalOpen(false)} 
@@ -990,11 +992,11 @@ export function ProjectPage({
                   <div className="space-y-4">
                     <div>
                       <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                        Project Name
+                        {t('projectPage.modal.projectName')}
                       </label>
                       <input 
                         type="text" 
-                        placeholder="Enter project name..." 
+                        placeholder={t('projectPage.modal.projectNamePlaceholder')} 
                         value={newProjectForm.title}
                         onChange={(e) => setNewProjectForm((prev) => ({ ...prev, title: e.target.value }))}
                         className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-purple-400 focus:shadow-[0_0_10px_rgba(168,85,247,0.2)] transition-all duration-300" 
@@ -1002,10 +1004,10 @@ export function ProjectPage({
                     </div>
                     <div>
                       <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                        Description
+                        {t('projectPage.modal.description')}
                       </label>
                       <textarea 
-                        placeholder="Enter project description..." 
+                        placeholder={t('projectPage.modal.descriptionPlaceholder')} 
                         rows={4} 
                         value={newProjectForm.description}
                         onChange={(e) => setNewProjectForm((prev) => ({ ...prev, description: e.target.value }))}
@@ -1020,7 +1022,7 @@ export function ProjectPage({
                       variant="ghost"
                       disabled={isCreatingProject}
                     >
-                      Cancel
+                      {t('projectPage.modal.cancel')}
                     </Button>
                     <Button 
                       onClick={handleCreateProject} 
@@ -1032,10 +1034,10 @@ export function ProjectPage({
                       {isCreatingProject ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Creating...
+                          {t('projectPage.modal.creating')}
                         </>
                       ) : (
-                        'Create Project'
+                        t('projectPage.modal.createProject')
                       )}
                     </Button>
                   </div>
@@ -1066,19 +1068,20 @@ export interface DeleteConfirmModalProps {
 }
 
 export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ itemName, onConfirm, onCancel, type }) => {
+  const { t } = useTranslation();
   const getTitle = () => {
     switch (type) {
-      case 'project': return 'Delete Project';
-      case 'task': return 'Delete Task';
-      case 'client': return 'Delete MCP Client';
+      case 'project': return t('projectPage.deleteModal.deleteProject');
+      case 'task': return t('projectPage.deleteModal.deleteTask');
+      case 'client': return t('projectPage.deleteModal.deleteClient');
     }
   };
 
   const getMessage = () => {
     switch (type) {
-      case 'project': return `Are you sure you want to delete the "${itemName}" project? This will also delete all associated tasks and documents and cannot be undone.`;
-      case 'task': return `Are you sure you want to delete the "${itemName}" task? This action cannot be undone.`;
-      case 'client': return `Are you sure you want to delete the "${itemName}" client? This will permanently remove its configuration and cannot be undone.`;
+      case 'project': return t('projectPage.deleteModal.projectMessage', { itemName });
+      case 'task': return t('projectPage.deleteModal.taskMessage', { itemName });
+      case 'client': return t('projectPage.deleteModal.clientMessage', { itemName });
     }
   };
 
@@ -1102,7 +1105,7 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ itemName
                 {getTitle()}
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                This action cannot be undone
+                {t('projectPage.deleteModal.cannotUndo')}
               </p>
             </div>
           </div>
@@ -1116,13 +1119,13 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ itemName
               onClick={onCancel}
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
             >
-              Cancel
+              {t('projectPage.deleteModal.cancel')}
             </button>
             <button
               onClick={onConfirm}
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors shadow-lg shadow-red-600/25 hover:shadow-red-700/25"
             >
-              Delete
+              {t('projectPage.deleteModal.delete')}
             </button>
           </div>
         </div>

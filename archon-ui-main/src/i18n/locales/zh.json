@@ -1,0 +1,279 @@
+{
+  "navigation": {
+    "knowledgeBase": "知识库",
+    "mcpServer": "MCP 服务器",
+    "projectManagement": "项目管理",
+    "projectsDisabled": "项目已禁用",
+    "settings": "设置"
+  },
+  "knowledgePage": {
+    "title": "知识库",
+    "searchPlaceholder": "搜索知识库...",
+    "filters": {
+      "allTypes": "所有类型",
+      "technical": "技术/编程",
+      "business": "商业/项目"
+    },
+    "views": {
+      "grid": "网格视图",
+      "table": "表格视图"
+    },
+    "selection": {
+      "cancel": "取消",
+      "select": "选择",
+      "itemsSelected": "已选择 {{count}} 项",
+      "selectAll": "全选",
+      "clearSelection": "清除选择",
+      "createGroup": "创建分组",
+      "deleteSelected": "删除选中项"
+    },
+    "addKnowledge": "添加知识",
+    "noItemsFound": "未找到符合所选筛选条件的知识项目。",
+    "addModal": {
+      "title": "添加知识源",
+      "knowledgeTypeLabel": "知识类型",
+      "knowledgeType": {
+        "technical": "技术/编程",
+        "business": "业务/项目"
+      },
+      "sourceType": {
+        "url": "URL / 网站",
+        "file": "上传文件"
+      },
+      "urlLabel": "要爬取的URL",
+      "urlPlaceholder": "https://example.com 或 example.com",
+      "httpsPrefix": "将自动添加 https:// 前缀",
+      "uploadLabel": "上传文档",
+      "chooseFile": "选择文件",
+      "dragDrop": "点击浏览或拖拽文件",
+      "supportedFiles": "支持 PDF、MD、DOC，最大 10MB",
+      "crawlDepth": "爬取深度",
+      "tagsLabel": "标签（如果留空，AI 将添加推荐标签）",
+      "tagsPlaceholder": "添加标签...",
+      "cancel": "取消",
+      "addSource": "添加源",
+      "adding": "添加中..."
+    }
+  },
+  "mcpPage": {
+    "title": "MCP 仪表盘",
+    "tabs": {
+      "serverControl": "服务器控制"
+    },
+    "serverTitle": "Archon MCP 服务器",
+    "status": {
+      "label": "状态",
+      "running": "运行中",
+      "stopped": "已停止",
+      "starting": "启动中",
+      "stopping": "停止中"
+    },
+    "uptime": "运行时间",
+    "buttons": {
+      "startServer": "启动服务器",
+      "starting": "启动中...",
+      "stopServer": "停止服务器",
+      "stopping": "停止中...",
+      "copy": "复制",
+      "clearLogs": "清除日志",
+      "oneClickInstall": "Cursor 一键安装"
+    },
+    "ideConfiguration": "IDE 配置",
+    "httpMode": "HTTP 模式",
+    "ides": {
+      "claudecode": "Claude Code",
+      "cursor": "Cursor",
+      "windsurf": "Windsurf",
+      "cline": "Cline",
+      "kiro": "Kiro",
+      "augment": "Augment"
+    },
+    "cursorInstallNote": "需要安装 Cursor 并将打开深度链接",
+    "serverLogs": "服务器日志",
+    "logs": {
+      "showing": "显示 {{count}} 条日志条目",
+      "noLogs": "无可用日志",
+      "waiting": "等待日志条目...",
+      "startServer": "启动服务器以查看日志"
+    },
+    "globalIdeRules": "全局 IDE 规则"
+  },
+  "mcpClientsPage": {
+    "title": "MCP 客户端",
+    "status": {
+      "connected": "已连接",
+      "disconnected": "已断开",
+      "connecting": "连接中..."
+    },
+    "actions": {
+      "connect": "连接",
+      "disconnect": "断开连接",
+      "refresh": "刷新"
+    }
+  },
+  "projectPage": {
+    "title": "项目",
+    "createProject": "创建项目",
+    "noProjects": "暂无项目",
+    "getStarted": "开始创建您的第一个项目！",
+    "buttons": {
+      "tryAgain": "重试",
+      "retry": "重试",
+      "unpinProject": "取消固定项目",
+      "pinProject": "固定项目",
+      "copyId": "复制 ID",
+      "copyIdTooltip": "复制项目 ID 到剪贴板",
+      "copyIdSuccess": "项目 ID 已复制到剪贴板",
+      "copied": "已复制！",
+      "deleteProject": "删除项目"
+    },
+    "creation": {
+      "completed": "项目创建完成 - 卡片 onComplete 触发",
+      "successToast": "项目 '{{title}}' 创建成功！",
+      "failed": "项目创建失败",
+      "errorToast": "项目创建失败：{{error}}"
+    },
+    "taskStatus": {
+      "todo": "待办",
+      "doing": "进行中",
+      "done": "已完成"
+    },
+    "tabs": {
+      "docs": "文档",
+      "tasks": "任务"
+    },
+    "loading": {
+      "projects": "正在加载项目...",
+      "tasks": "正在加载任务..."
+    },
+    "modal": {
+      "createTitle": "创建新项目",
+      "projectName": "项目名称",
+      "projectNamePlaceholder": "输入项目名称...",
+      "description": "描述",
+      "descriptionPlaceholder": "输入项目描述...",
+      "cancel": "取消",
+      "createProject": "创建项目",
+      "creating": "创建中..."
+    },
+    "deleteModal": {
+      "deleteProject": "删除项目",
+      "deleteTask": "删除任务",
+      "deleteClient": "删除 MCP 客户端",
+      "projectMessage": "确定要删除 \"{{itemName}}\" 项目吗？这将同时删除所有相关任务和文档，且无法撤销。",
+      "taskMessage": "确定要删除 \"{{itemName}}\" 任务吗？此操作无法撤销。",
+      "clientMessage": "确定要删除 \"{{itemName}}\" 客户端吗？这将永久删除其配置且无法撤销。",
+      "cannotUndo": "此操作无法撤销",
+      "cancel": "取消",
+      "delete": "删除"
+    }
+  },
+  "settingsPage": {
+    "title": "设置",
+    "errors": {
+      "failedToLoad": "加载设置失败"
+    },
+    "sections": {
+      "features": "功能",
+      "ideGlobalRules": "IDE 全局规则",
+      "testStatus": "测试状态",
+      "apiKeys": "API 密钥",
+      "ragSettings": "RAG 设置",
+      "codeExtraction": "代码提取",
+      "bugReporting": "错误报告"
+    },
+    "bugReporting": {
+      "description": "通过报告您遇到的错误和问题来帮助我们改进 Archon。",
+      "reportButton": "报告错误",
+      "features": {
+        "githubIssues": "直接在 GitHub Issues 中创建报告",
+        "systemContext": "自动包含系统上下文信息",
+        "privacy": "保护您的隐私 - 不发送个人数据"
+      }
+    },
+    "buttonPlayground": {
+      "toggle": "切换按钮演练场"
+    }
+  },
+  "mainLayout": {
+    "backendStarting": "后端正在启动...",
+    "backendError": "启动后端失败。请检查您的配置。",
+    "knowledgeAssistant": "知识助手 - 即将推出",
+    "comingSoon": "即将推出",
+    "knowledgeAssistantDevelopment": "知识助手正在开发中"
+  },
+  "backendError": {
+    "title": "后端服务启动失败",
+    "description": "Archon 后端服务启动失败。这通常是由于配置问题导致的。",
+    "checkDockerLogs": "检查 Docker 日志",
+    "dockerLogsDescription": "在 Docker Desktop 中检查 <span class=\"text-red-400 font-bold\">Archon-Server</span> 日志以获取详细的错误信息。",
+    "steps": {
+      "openDocker": "1. 打开 Docker Desktop",
+      "goToContainers": "2. 转到容器选项卡",
+      "clickArchonServer": "3. 点击 <span class=\"text-red-400 font-semibold\">Archon-Server</span>",
+      "viewLogs": "4. 查看日志以获取具体错误信息"
+    },
+    "commonIssue": "<strong>常见问题：</strong> 在 .env 文件中使用了 ANON 密钥而不是 SERVICE 密钥",
+    "fixInstructions": "在修复 .env 文件中的问题后，重新创建 Docker 容器：",
+    "dockerNote": "注意：使用 'down' 和 'up'，而不是 'restart' - 需要重新创建容器以加载新的环境变量",
+    "retryButton": "重试连接"
+  },
+  "chatPanel": {
+    "title": "知识库助手",
+    "status": {
+      "offline": "聊天离线",
+      "connecting": "连接中...",
+      "online": "在线",
+      "reconnecting": "正在尝试重新连接..."
+    },
+    "messages": {
+      "agentTyping": "助手正在输入...",
+      "offlineMessage": "聊天当前离线。请使用上方的重新连接按钮重试。",
+      "offlineShort": "聊天离线...",
+      "connectingMessage": "连接中..."
+    },
+    "input": {
+      "placeholder": "搜索知识库...",
+      "placeholderOffline": "聊天离线...",
+      "placeholderConnecting": "连接中..."
+    },
+    "errors": {
+      "reconnectionFailed": "重新连接失败。服务器可能仍然离线。",
+      "initializationFailed": "初始化聊天失败。服务器可能离线。",
+      "sendMessageFailed": "发送消息失败。请重试。"
+    }
+  },
+  "onboardingPage": {
+    "welcome": "欢迎使用 Archon",
+    "setupDescription": "让我们通过几个简单的步骤为您设置 AI 提供商。这将启用智能知识检索和代码辅助功能。",
+    "getStarted": "开始使用",
+    "configureProvider": "配置 AI 提供商",
+    "allSet": "设置完成！",
+    "readyDescription": "您已准备好开始使用 Archon。通过网站爬取或文档上传来添加知识源。",
+    "startUsing": "开始使用 Archon",
+    "setupWizard": "设置向导",
+    "next": "下一步",
+    "previous": "上一步",
+    "finish": "完成"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "update": "更新",
+    "refresh": "刷新",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "close": "关闭",
+    "open": "打开",
+    "yes": "是",
+    "no": "否"
+  }
+}

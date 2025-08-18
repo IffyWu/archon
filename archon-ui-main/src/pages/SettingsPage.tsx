@@ -15,6 +15,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "../contexts/ToastContext";
 import { useSettings } from "../contexts/SettingsContext";
+import { useTranslation } from "react-i18next";
 import { useStaggeredEntrance } from "../hooks/useStaggeredEntrance";
 import { FeaturesSection } from "../components/settings/FeaturesSection";
 import { APIKeysSection } from "../components/settings/APIKeysSection";
@@ -32,6 +33,7 @@ import {
 } from "../services/credentialsService";
 
 export const SettingsPage = () => {
+  const { t } = useTranslation();
   const [ragSettings, setRagSettings] = useState<RagSettings>({
     USE_CONTEXTUAL_EMBEDDINGS: false,
     CONTEXTUAL_EMBEDDINGS_MAX_WORKERS: 3,
@@ -85,9 +87,9 @@ export const SettingsPage = () => {
         await credentialsService.getCodeExtractionSettings();
       setCodeExtractionSettings(codeExtractionSettingsData);
     } catch (err) {
-      setError("Failed to load settings");
+      setError(t('settingsPage.errors.failedToLoad'));
       console.error(err);
-      showToast("Failed to load settings", "error");
+      showToast(t('settingsPage.errors.failedToLoad'), "error");
     } finally {
       setLoading(false);
     }
@@ -118,7 +120,7 @@ export const SettingsPage = () => {
           variants={titleVariants}
         >
           <Settings className="w-7 h-7 text-blue-500 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
-          Settings
+          {t('settingsPage.title')}
         </motion.h1>
       </motion.div>
 
@@ -129,7 +131,7 @@ export const SettingsPage = () => {
         <div className="space-y-6">
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="Features"
+              title={t('settingsPage.sections.features')}
               icon={Palette}
               accentColor="purple"
               storageKey="features"
@@ -141,7 +143,7 @@ export const SettingsPage = () => {
           {projectsEnabled && (
             <motion.div variants={itemVariants}>
               <CollapsibleSettingsCard
-                title="IDE Global Rules"
+                title={t('settingsPage.sections.ideGlobalRules')}
                 icon={FileCode}
                 accentColor="pink"
                 storageKey="ide-rules"
@@ -153,7 +155,7 @@ export const SettingsPage = () => {
           )}
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="Test Status"
+              title={t('settingsPage.sections.testStatus')}
               icon={Activity}
               accentColor="cyan"
               storageKey="test-status"
@@ -168,7 +170,7 @@ export const SettingsPage = () => {
         <div className="space-y-6">
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="API Keys"
+              title={t('settingsPage.sections.apiKeys')}
               icon={Key}
               accentColor="pink"
               storageKey="api-keys"
@@ -179,7 +181,7 @@ export const SettingsPage = () => {
           </motion.div>
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="RAG Settings"
+              title={t('settingsPage.sections.ragSettings')}
               icon={Brain}
               accentColor="green"
               storageKey="rag-settings"
@@ -193,7 +195,7 @@ export const SettingsPage = () => {
           </motion.div>
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="Code Extraction"
+              title={t('settingsPage.sections.codeExtraction')}
               icon={Code}
               accentColor="orange"
               storageKey="code-extraction"
@@ -209,26 +211,25 @@ export const SettingsPage = () => {
           {/* Bug Report Section */}
           <motion.div variants={itemVariants}>
             <CollapsibleSettingsCard
-              title="Bug Reporting"
+              title={t('settingsPage.sections.bugReporting')}
               icon={Bug}
-              iconColor="text-red-500"
-              borderColor="border-red-200 dark:border-red-800"
+              accentColor="orange"
+              storageKey="bug-reporting"
               defaultExpanded={false}
             >
               <div className="space-y-4">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Found a bug or issue? Report it to help improve Archon V2
-                  Alpha.
+                  {t('settingsPage.bugReporting.description')}
                 </p>
                 <div className="flex justify-start">
                   <BugReportButton variant="secondary" size="md">
-                    Report Bug
+                    {t('settingsPage.bugReporting.reportButton')}
                   </BugReportButton>
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
-                  <p>• Bug reports are sent directly to GitHub Issues</p>
-                  <p>• System context is automatically collected</p>
-                  <p>• Your privacy is protected - no personal data is sent</p>
+                  <p>• {t('settingsPage.bugReporting.features.githubIssues')}</p>
+                  <p>• {t('settingsPage.bugReporting.features.systemContext')}</p>
+                  <p>• {t('settingsPage.bugReporting.features.privacy')}</p>
                 </div>
               </div>
             </CollapsibleSettingsCard>
@@ -241,7 +242,7 @@ export const SettingsPage = () => {
         <button
           onClick={() => setShowButtonPlayground(!showButtonPlayground)}
           className="relative w-8 h-8 rounded-full border border-blue-400/30 bg-blue-500/5 hover:bg-blue-500/10 transition-all duration-200 flex items-center justify-center group"
-          title="Toggle Button Playground"
+          title={t('settingsPage.buttonPlayground.toggle')}
         >
           <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
           <motion.div

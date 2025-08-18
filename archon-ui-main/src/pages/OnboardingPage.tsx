@@ -5,8 +5,10 @@ import { Sparkles, Key, Check, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { ProviderStep } from '../components/onboarding/ProviderStep';
+import { useTranslation } from 'react-i18next';
 
 export const OnboardingPage = () => {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();
 
@@ -77,22 +79,21 @@ export const OnboardingPage = () => {
               </div>
               
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                Welcome to Archon
+                {t('onboardingPage.welcome')}
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-zinc-400 mb-8 max-w-md mx-auto">
-                Let's get you set up with your AI provider in just a few steps. This will enable intelligent knowledge retrieval and code assistance.
+                {t('onboardingPage.setupDescription')}
               </p>
               
               <Button
                 variant="primary"
                 size="lg"
                 icon={<ArrowRight className="w-5 h-5 ml-2" />}
-                iconPosition="right"
                 onClick={() => setCurrentStep(2)}
                 className="min-w-[200px]"
               >
-                Get Started
+                {t('onboardingPage.getStarted')}
               </Button>
             </Card>
           </motion.div>
@@ -107,7 +108,7 @@ export const OnboardingPage = () => {
                   <Key className="w-6 h-6 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                  Configure AI Provider
+                  {t('onboardingPage.configureProvider')}
                 </h2>
               </div>
               
@@ -139,11 +140,11 @@ export const OnboardingPage = () => {
               </div>
               
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                All Set!
+                {t('onboardingPage.allSet')}
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-zinc-400 mb-8 max-w-md mx-auto">
-                You're ready to start using Archon. Begin by adding knowledge sources through website crawling or document uploads.
+                {t('onboardingPage.readyDescription')}
               </p>
               
               <Button
@@ -152,7 +153,7 @@ export const OnboardingPage = () => {
                 onClick={handleComplete}
                 className="min-w-[200px]"
               >
-                Start Using Archon
+                {t('onboardingPage.startUsing')}
               </Button>
             </Card>
           </motion.div>
